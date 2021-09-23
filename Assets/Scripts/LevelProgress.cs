@@ -8,6 +8,7 @@ public class LevelProgress : MonoBehaviour
     [SerializeField] private Image _progressImage;
 
     private float _originDistance;
+    private float _time;
     
     private void Start()
     {
@@ -16,6 +17,11 @@ public class LevelProgress : MonoBehaviour
 
     private void Update()
     {
-        _progressImage.fillAmount = _playerTransform.position.z / _originDistance;
+        if (_progressImage.fillAmount < 1)
+        {
+            _progressImage.fillAmount = Mathf.Lerp(_progressImage.fillAmount,_playerTransform.position.z / _originDistance,_time);
+            _time += Time.deltaTime;
+        }
+        
     }
 }

@@ -17,6 +17,7 @@ public class SpikesPlatform : ActiveElement
 
     public override void Activate()
     {
+        base.Activate();
         _spikesContainerTransofrm.DOLocalMoveY(_activatedYPosition,_activatedAnimationDuraction);
     }
 }

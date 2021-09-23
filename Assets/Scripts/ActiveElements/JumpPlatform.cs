@@ -18,6 +18,5 @@ public class JumpPlatform : ActiveElement
         transform
             .DOLocalMoveY(_deactivatedYPosition,_deactivatedAnimationDuraction)
             .OnComplete(()=>gameObject.SetActive(false));
-        
     }
 }
