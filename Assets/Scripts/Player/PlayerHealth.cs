@@ -3,10 +3,12 @@ using UnityEngine;
 
 [RequireComponent(typeof(PlayerObserver))]
 [RequireComponent(typeof(PlayerAnimator))]
+[RequireComponent(typeof(PlayerEffects))]
 public class PlayerHealth : MonoBehaviour
 {
     private PlayerObserver _playerObserver;
     private PlayerAnimator _playerAnimator;
+    private PlayerEffects _playerEffects;
 
     public event Action Died;
 
@@ -14,6 +16,7 @@ public class PlayerHealth : MonoBehaviour
     {
         _playerObserver = GetComponent<PlayerObserver>();
         _playerAnimator = GetComponent<PlayerAnimator>();
+        _playerEffects = GetComponent<PlayerEffects>();
     }
 
     private void OnEnable()
@@ -33,6 +36,7 @@ public class PlayerHealth : MonoBehaviour
 
     private void Die()
     {
+        _playerEffects.Stop();
         _playerAnimator.PlayDie();
         Died?.Invoke();
     }

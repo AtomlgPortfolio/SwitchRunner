@@ -3,10 +3,12 @@ using UnityEngine;
 
 [RequireComponent(typeof(PlayerObserver))]
 [RequireComponent(typeof(PlayerAnimator))]
+[RequireComponent(typeof(PlayerEffects))]
 public class PlayerCelebration : MonoBehaviour
 {
     private PlayerObserver _playerObserver;
     private PlayerAnimator _playerAnimator;
+    private PlayerEffects _playerEffects;
 
     public event Action Celebrate;
 
@@ -14,6 +16,8 @@ public class PlayerCelebration : MonoBehaviour
     {
         _playerObserver = GetComponent<PlayerObserver>();
         _playerAnimator = GetComponent<PlayerAnimator>();
+        _playerEffects = GetComponent<PlayerEffects>();
+        
     }
 
     private void OnEnable()
@@ -30,5 +34,6 @@ public class PlayerCelebration : MonoBehaviour
     {
         _playerAnimator.PlayCelebrate();
         Celebrate?.Invoke();
+        _playerEffects.Stop();
     }
 }

@@ -5,6 +5,7 @@ using Zenject;
 [RequireComponent(typeof(PlayerAnimator))]
 [RequireComponent(typeof(PlayerHealth))]
 [RequireComponent(typeof(PlayerObserver))]
+[RequireComponent(typeof(PlayerEffects))]
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private float _minXBorderValue = -1.08f;
@@ -13,7 +14,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float _height = 5f;
     [SerializeField] private float _distance = 10f;
     [SerializeField] private Vector3 _capsuleColliderJumpPosition;
-
+    
+    private PlayerEffects _playerEffects;
     private Vector3 _capsuleColliderOriginPosition;
     private CapsuleCollider _capsuleCollider;
     private PlayerHealth _playerHealth;
@@ -40,6 +42,7 @@ public class PlayerMovement : MonoBehaviour
         _playerObserver = GetComponent<PlayerObserver>();
         _capsuleCollider = GetComponent<CapsuleCollider>();
         _rigidbody = GetComponent<Rigidbody>();
+        _playerEffects = GetComponent<PlayerEffects>();
 
         _capsuleColliderOriginPosition = _capsuleCollider.center;
         AllowMovement();
@@ -120,12 +123,14 @@ public class PlayerMovement : MonoBehaviour
         {
             moveVector = new Vector3(_horizontal, _parabolaVector.y, _parabolaVector.z);
             transform.position = moveVector;
+            _playerEffects.Stop();
         }
         else if (_isGrounded)
         {
             moveVector = new Vector3(_horizontal, 0, vertical);
             transform.position = moveVector;
             _playerAnimator.PlayWalk();
+            _playerEffects.Play();
         }
     }
 
@@ -148,7 +153,7 @@ public class PlayerMovement : MonoBehaviour
         Vector3 finishPoint = Vector3.zero;
         finishPoint.z = transform.position.z + _distance;
         finishPoint.y = _finishPointY;
-        
+
         float time = 0;
         float step = 0;
 

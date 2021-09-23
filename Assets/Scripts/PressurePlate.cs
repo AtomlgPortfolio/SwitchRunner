@@ -8,9 +8,13 @@ public class PressurePlate : MonoBehaviour
     [SerializeField] private Transform _buttonTransform;
     [SerializeField] private  float _pressedButtonYPosition = 0.09f;
     [SerializeField] private  float _pressedAnimationDuration = 1f;
+    [SerializeField] private ParticleSystem _runeEffect;
+    [SerializeField] private ParticleSystem _sparksEffect;
 
     private void OnTriggerEnter(Collider other)
     {
+        _runeEffect.Stop();
+        _sparksEffect.Play();
         PlayPressAnimation();
         DeactivateObstacles();
         ActivateObstacles();
