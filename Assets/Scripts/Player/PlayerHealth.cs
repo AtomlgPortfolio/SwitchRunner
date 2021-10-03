@@ -1,36 +1,41 @@
 using System;
 using UnityEngine;
+using Zenject;
 
-[RequireComponent(typeof(PlayerObserver))]
+[RequireComponent(typeof(PlayerCollisionObserver))]
 [RequireComponent(typeof(PlayerAnimator))]
 [RequireComponent(typeof(PlayerEffects))]
+[RequireComponent(typeof(PlayerShadow))]
 public class PlayerHealth : MonoBehaviour
 {
-    private PlayerObserver _playerObserver;
+    private PlayerCollisionObserver _playerCollisionObserver;
     private PlayerAnimator _playerAnimator;
     private PlayerEffects _playerEffects;
+    private PlayerShadow _playerShadow;
 
     public event Action Died;
 
     private void Awake()
     {
-        _playerObserver = GetComponent<PlayerObserver>();
+        _playerCollisionObserver = GetComponent<PlayerCollisionObserver>();
         _playerAnimator = GetComponent<PlayerAnimator>();
         _playerEffects = GetComponent<PlayerEffects>();
+        _playerShadow = GetComponent<PlayerShadow>();
     }
 
     private void OnEnable()
     {
-        _playerObserver.ObstacleCollided += OnObstacleCollided;
+        _playerCollisionObserver.ObstacleCollided += OnObstacleCollided;
     }
 
     private void OnDisable()
     {
-        _playerObserver.ObstacleCollided -= OnObstacleCollided;
+        _playerCollisionObserver.ObstacleCollided -= OnObstacleCollided;
     }
 
     private void OnObstacleCollided()
     {
+        _playerCollisionObserver.ObstacleCollided -= OnObstacleCollided;
         Die();
     }
 
@@ -38,6 +43,7 @@ public class PlayerHealth : MonoBehaviour
     {
         _playerEffects.Stop();
         _playerAnimator.PlayDie();
+        _playerShadow.Disable();
         Died?.Invoke();
     }
 }

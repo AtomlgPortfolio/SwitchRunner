@@ -1,81 +1,82 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using Zenject;
 
 [RequireComponent(typeof(PlayerAnimator))]
 [RequireComponent(typeof(PlayerHealth))]
-[RequireComponent(typeof(PlayerObserver))]
+[RequireComponent(typeof(PlayerCollisionObserver))]
 [RequireComponent(typeof(PlayerEffects))]
+[RequireComponent(typeof(PlayerShadow))]
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private float _minXBorderValue = -1.08f;
     [SerializeField] private float _maxXBorderValue = 1.08f;
-    [SerializeField] private float _duration = 5f;
-    [SerializeField] private float _height = 5f;
-    [SerializeField] private float _distance = 10f;
-    [SerializeField] private Vector3 _capsuleColliderJumpPosition;
+    [SerializeField] private float _jumpDuration = 2f;
+    [SerializeField] private float _jumpHeight = 0.5f;
+    [SerializeField] private float _jumpDistance = 1.45f;
+    [SerializeField] private StartGamePanel _startGamePanel;
     
     private PlayerEffects _playerEffects;
-    private Vector3 _capsuleColliderOriginPosition;
-    private CapsuleCollider _capsuleCollider;
     private PlayerHealth _playerHealth;
     private PlayerAnimator _playerAnimator;
-    private PlayerObserver _playerObserver;
+    private PlayerCollisionObserver _playerCollisionObserver;
+    private PlayerShadow _playerShadow;
     private IInputService _inputService;
-    private Vector2 _axis;
     private bool _verticalMovementAllowed;
     private float _horizontal;
     private bool _isJumpStarted;
     private bool _isGrounded = true;
-    private Vector3 _velocity;
     private bool _isJumping;
     private Vector3 _parabolaVector;
-    private Rigidbody _rigidbody;
     private float _finishPointY = -0.062f;
 
+    public event Action Jumped;
+
     [Inject]
-    public void Construct(IInputService inputService)
+    private void Construct(IInputService inputService)
     {
         _inputService = inputService;
+    }
+
+    private void Awake()
+    {
         _playerAnimator = GetComponent<PlayerAnimator>();
         _playerHealth = GetComponent<PlayerHealth>();
-        _playerObserver = GetComponent<PlayerObserver>();
-        _capsuleCollider = GetComponent<CapsuleCollider>();
-        _rigidbody = GetComponent<Rigidbody>();
+        _playerCollisionObserver = GetComponent<PlayerCollisionObserver>();
         _playerEffects = GetComponent<PlayerEffects>();
-
-        _capsuleColliderOriginPosition = _capsuleCollider.center;
-        AllowMovement();
+        _playerShadow = GetComponent<PlayerShadow>();
     }
 
     private void OnEnable()
     {
         _playerHealth.Died += ForbidMovement;
-        _playerObserver.StartJumpZoneEnter += OnStartJumpZoneEnter;
-        _playerObserver.PlatformJumpZoneEnter += OnPlatformJumpZoneEnter;
-        _playerObserver.FinishJumpZoneEnter += OnFinishJumpZoneEnter;
-        _playerObserver.FinishZoneEnter += ForbidMovement;
+        _playerCollisionObserver.StartJumpZoneEnter += OnStartJumpZoneEnter;
+        _playerCollisionObserver.PlatformJumpZoneEnter += OnPlatformJumpZoneEnter;
+        _playerCollisionObserver.FinishJumpZoneEnter += OnFinishJumpZoneEnter;
+        _playerCollisionObserver.FinishZoneEnter += ForbidMovement;
+        _startGamePanel.Clicked += AllowMovement;
     }
 
     private void OnDisable()
     {
-        _playerHealth.Died += ForbidMovement;
-        _playerObserver.StartJumpZoneEnter -= OnStartJumpZoneEnter;
-        _playerObserver.PlatformJumpZoneEnter -= OnPlatformJumpZoneEnter;
-        _playerObserver.FinishJumpZoneEnter -= OnFinishJumpZoneEnter;
-        _playerObserver.FinishZoneEnter -= ForbidMovement;
+        _playerHealth.Died -= ForbidMovement;
+        _playerCollisionObserver.StartJumpZoneEnter -= OnStartJumpZoneEnter;
+        _playerCollisionObserver.PlatformJumpZoneEnter -= OnPlatformJumpZoneEnter;
+        _playerCollisionObserver.FinishJumpZoneEnter -= OnFinishJumpZoneEnter;
+        _playerCollisionObserver.FinishZoneEnter -= ForbidMovement;
+        _startGamePanel.Clicked -= AllowMovement;
     }
 
     private void OnPlatformJumpZoneEnter()
     {
-        _rigidbody.useGravity = false;
         StartJump();
     }
 
     private void OnFinishJumpZoneEnter()
     {
+        _playerShadow.Enable();
         _isGrounded = true;
-        _capsuleCollider.center = _capsuleColliderOriginPosition;
     }
 
     private void OnStartJumpZoneEnter()
@@ -99,6 +100,7 @@ public class PlayerMovement : MonoBehaviour
     private void StartJump()
     {
         _isJumpStarted = true;
+        _playerShadow.Disable();
         _playerAnimator.StopWalk();
         _playerAnimator.PlayJump();
     }
@@ -151,25 +153,21 @@ public class PlayerMovement : MonoBehaviour
         _parabolaVector = Vector3.zero;
         Vector3 position = transform.position;
         Vector3 finishPoint = Vector3.zero;
-        finishPoint.z = transform.position.z + _distance;
+        finishPoint.z = transform.position.z + _jumpDistance;
         finishPoint.y = _finishPointY;
 
         float time = 0;
         float step = 0;
-
-        _capsuleCollider.enabled = false;
+        
         while (time < 1 && transform.position.y != 0)
         {
             step += Time.deltaTime;
-            time = step / _duration;
-            _parabolaVector = MathParabola.Parabola(position, finishPoint, _height, time);
+            time = step / _jumpDuration;
+            _parabolaVector = MathParabola.Parabola(position, finishPoint, _jumpHeight, time);
             yield return null;
         }
 
         _isJumping = false;
-        yield return null;
-        _rigidbody.useGravity = true;
-        _capsuleCollider.center = _capsuleColliderJumpPosition;
-        _capsuleCollider.enabled = true;
+        Jumped?.Invoke();
     }
 }

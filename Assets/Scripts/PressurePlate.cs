@@ -30,9 +30,9 @@ public class PressurePlate : MonoBehaviour
 
     private void DeactivateObstacles()
     {
-        foreach (var activatetedObstacle in _activatetedObstacles)
+        foreach (var activatedObstacle in _activatetedObstacles)
         {
-            activatetedObstacle.Activate();
+            activatedObstacle.Activate();
         }
     }
 

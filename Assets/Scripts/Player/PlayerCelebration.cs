@@ -1,38 +1,44 @@
 using System;
 using UnityEngine;
 
-[RequireComponent(typeof(PlayerObserver))]
+[RequireComponent(typeof(PlayerCollisionObserver))]
 [RequireComponent(typeof(PlayerAnimator))]
 [RequireComponent(typeof(PlayerEffects))]
+[RequireComponent(typeof(PlayerShadow))]
 public class PlayerCelebration : MonoBehaviour
 {
-    private PlayerObserver _playerObserver;
+    [SerializeField] private Vector3 _capsuleColliderCelebratePosition;
+    [SerializeField] private Vector3 _shadowPosition;
+    
+    private PlayerCollisionObserver _playerCollisionObserver;
     private PlayerAnimator _playerAnimator;
     private PlayerEffects _playerEffects;
+    private PlayerShadow _playerShadow;
 
     public event Action Celebrate;
 
     private void Awake()
     {
-        _playerObserver = GetComponent<PlayerObserver>();
+        _playerCollisionObserver = GetComponent<PlayerCollisionObserver>();
         _playerAnimator = GetComponent<PlayerAnimator>();
         _playerEffects = GetComponent<PlayerEffects>();
-        
+        _playerShadow = GetComponent<PlayerShadow>();
     }
 
     private void OnEnable()
     {
-        _playerObserver.FinishZoneEnter += OnFinishZoneEnter;
+        _playerCollisionObserver.FinishZoneEnter += OnFinishZoneEnter;
     }
 
     private void OnDisable()
     {
-        _playerObserver.FinishZoneEnter -= OnFinishZoneEnter;
+        _playerCollisionObserver.FinishZoneEnter -= OnFinishZoneEnter;
     }
     
     private void OnFinishZoneEnter()
     {
         _playerAnimator.PlayCelebrate();
+        _playerShadow.SetPosition(_shadowPosition);
         Celebrate?.Invoke();
         _playerEffects.Stop();
     }
