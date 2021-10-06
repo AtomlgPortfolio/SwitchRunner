@@ -1,22 +1,28 @@
 using UnityEngine;
 
-public class AndroidVibrationService: IVibrationService
+namespace Infrastructure.Services.Vibration
 {
-    private const string VibrateMethodName = "vibrate";
-    private const string CancelVibrateMethodName = "cancel";
-    private const long VibrationTime = 10;
-    
-    private AndroidJavaClass _unityPlayer;
-    private AndroidJavaObject _currentActivity;
-    private AndroidJavaObject _vibrator;
-
-    public void Vibrate()
+    public class AndroidVibrationService : IVibrationService
     {
-        _vibrator.Call(VibrateMethodName, VibrationTime);
-    }
+        private const string VibrateMethodName = "vibrate";
+        private const string CancelVibrateMethodName = "cancel";
+        private const long VibrationTime = 25;
 
-    public void Cancel()
-    {
-        _vibrator.Call(CancelVibrateMethodName);
+        private AndroidJavaClass _unityPlayer;
+        private AndroidJavaObject _currentActivity;
+        private AndroidJavaObject _vibrator;
+
+        public AndroidVibrationService()
+        {
+            _unityPlayer = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
+            _currentActivity = _unityPlayer.GetStatic<AndroidJavaObject>("currentActivity");
+            _vibrator = _currentActivity.Call<AndroidJavaObject>("getSystemService", "vibrator");
+        }
+
+        public void Vibrate() => 
+            _vibrator.Call(VibrateMethodName, VibrationTime);
+
+        public void Cancel() => 
+            _vibrator.Call(CancelVibrateMethodName);
     }
 }

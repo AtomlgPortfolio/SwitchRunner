@@ -1,38 +1,40 @@
-using Infrastructure.Services.Input;
 using UnityEngine;
 
-public class MobileInputService : InputService
+namespace Infrastructure.Services.Input
 {
-    public override Vector2 Axis => 
-        MobileInputAxis();
-
-    private Vector2 MobileInputAxis()
+    public class MobileInputService : InputService
     {
-        float y = 0;
-        float x = 0;
-        if (Input.touchCount > 0)
+        public override Vector2 Axis => 
+            MobileInputAxis();
+
+        private Vector2 MobileInputAxis()
         {
-            Touch touch = UnityEngine.Input.GetTouch(0);
-            switch (touch.phase)
+            float y = 0;
+            float x = 0;
+            if (UnityEngine.Input.touchCount > 0)
             {
-                case TouchPhase.Stationary:
-                    y = 1;
-                    break;
-                case TouchPhase.Moved:
-                    y = 1;
-                    if (touch.deltaPosition.x > 0)
-                    {
-                        x = 1;
-                    }
-                    else if (touch.deltaPosition.x < 0)
-                    {
-                        x = -1;
-                    }
+                Touch touch = UnityEngine.Input.GetTouch(0);
+                switch (touch.phase)
+                {
+                    case TouchPhase.Stationary:
+                        y = 1;
+                        break;
+                    case TouchPhase.Moved:
+                        y = 1;
+                        if (touch.deltaPosition.x > 0)
+                        {
+                            x = 1;
+                        }
+                        else if (touch.deltaPosition.x < 0)
+                        {
+                            x = -1;
+                        }
 
-                    break;
+                        break;
+                }
             }
-        }
 
-        return new Vector2(x, y);
+            return new Vector2(x, y);
+        }
     }
 }

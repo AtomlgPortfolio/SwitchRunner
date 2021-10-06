@@ -1,49 +1,59 @@
 using System;
 using UnityEngine;
-using Zenject;
 
-[RequireComponent(typeof(PlayerCollisionObserver))]
-[RequireComponent(typeof(PlayerAnimator))]
-[RequireComponent(typeof(PlayerEffects))]
-[RequireComponent(typeof(PlayerShadow))]
-public class PlayerHealth : MonoBehaviour
+namespace Player
 {
-    private PlayerCollisionObserver _playerCollisionObserver;
-    private PlayerAnimator _playerAnimator;
-    private PlayerEffects _playerEffects;
-    private PlayerShadow _playerShadow;
-
-    public event Action Died;
-
-    private void Awake()
+    [RequireComponent(typeof(PlayerCollisionObserver))]
+    [RequireComponent(typeof(PlayerAnimator))]
+    [RequireComponent(typeof(PlayerEffects))]
+    [RequireComponent(typeof(PlayerShadow))]
+    public class PlayerHealth : MonoBehaviour
     {
-        _playerCollisionObserver = GetComponent<PlayerCollisionObserver>();
-        _playerAnimator = GetComponent<PlayerAnimator>();
-        _playerEffects = GetComponent<PlayerEffects>();
-        _playerShadow = GetComponent<PlayerShadow>();
-    }
+        private PlayerCollisionObserver _playerCollisionObserver;
+        private PlayerAnimator _playerAnimator;
+        private PlayerEffects _playerEffects;
+        private PlayerShadow _playerShadow;
 
-    private void OnEnable()
-    {
-        _playerCollisionObserver.ObstacleCollided += OnObstacleCollided;
-    }
+        public event Action Died;
 
-    private void OnDisable()
-    {
-        _playerCollisionObserver.ObstacleCollided -= OnObstacleCollided;
-    }
+        private void Awake()
+        {
+            _playerCollisionObserver = GetComponent<PlayerCollisionObserver>();
+            _playerAnimator = GetComponent<PlayerAnimator>();
+            _playerEffects = GetComponent<PlayerEffects>();
+            _playerShadow = GetComponent<PlayerShadow>();
+        }
 
-    private void OnObstacleCollided()
-    {
-        _playerCollisionObserver.ObstacleCollided -= OnObstacleCollided;
-        Die();
-    }
+        private void OnEnable()
+        {
+            _playerCollisionObserver.ObstacleCollided += OnObstacleCollided;
+            _playerCollisionObserver.DeathZoneEnter += OnDeathZoneEnter;
+        }
 
-    private void Die()
-    {
-        _playerEffects.Stop();
-        _playerAnimator.PlayDie();
-        _playerShadow.Disable();
-        Died?.Invoke();
+        private void OnDisable()
+        {
+            _playerCollisionObserver.ObstacleCollided -= OnObstacleCollided;
+            _playerCollisionObserver.DeathZoneEnter -= OnObstacleCollided;
+        }
+
+        private void OnObstacleCollided()
+        {
+            _playerCollisionObserver.ObstacleCollided -= OnObstacleCollided;
+            _playerAnimator.PlayDie();
+            Die();
+        }
+
+        private void OnDeathZoneEnter()
+        {
+            _playerCollisionObserver.ObstacleCollided -= OnDeathZoneEnter;
+            Die();
+        }
+
+        private void Die()
+        {
+            _playerEffects.Stop();
+            _playerShadow.Disable();
+            Died?.Invoke();
+        }
     }
 }

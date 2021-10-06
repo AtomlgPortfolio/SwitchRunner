@@ -1,21 +1,24 @@
 using UnityEngine;
 
-public class PlayerShadow : MonoBehaviour
+namespace Player
 {
-    [SerializeField] private GameObject _shadow;
-
-    public void Enable()
+    public class PlayerShadow : MonoBehaviour
     {
-        _shadow.SetActive(true);
-    }
+        [SerializeField] private GameObject _shadow;
 
-    public void Disable()
-    {
-        _shadow.SetActive(false);
-    }
+        public void Enable()
+        {
+            _shadow.SetActive(true);
+        }
 
-    public void SetPosition(Vector3 position)
-    {
-        _shadow.transform.position = position;
+        public void Disable()
+        {
+            _shadow.SetActive(false);
+        }
+
+        public void SetPosition(Vector3 position)
+        {
+            _shadow.transform.position = position;
+        }
     }
 }

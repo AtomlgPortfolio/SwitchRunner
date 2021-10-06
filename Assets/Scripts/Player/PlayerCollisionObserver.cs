@@ -1,62 +1,91 @@
 using System;
+using JumpZones;
 using UnityEngine;
+using Zones;
 
-public class PlayerCollisionObserver : MonoBehaviour
+namespace Player
 {
-    public event Action ObstacleCollided;
-    public event Action StartJumpZoneEnter;
-    public event Action PlatformJumpZoneEnter;
-    public event Action PlatformJumpZoneExit;
-    public event Action FinishJumpZoneEnter;
-    public event Action StartJumpZoneExit;
-    public event Action FinishZoneEnter;
-    public event Action PleasurePressed;
-
-    private void OnCollisionEnter(Collision other)
+    public class PlayerCollisionObserver : MonoBehaviour
     {
-        if (other.gameObject.TryGetComponent(out Obstacle obstacle))
-        {
-            ObstacleCollided?.Invoke();
-        }
-        else if (other.gameObject.TryGetComponent(out JumpPlatformZone jumpPlatformZone))
-        {
-            PlatformJumpZoneEnter?.Invoke();
-        }
-    }
+        public event Action ObstacleCollided;
+        public event Action StartJumpZoneEnter;
+        public event Action StartJumpZoneExit;
+        public event Action FinishZoneEnter;
+        public event Action FinishZoneExit;
+        public event Action FinishJumpZoneEnter;
+        public event Action PlatformStartJumpZoneEnter;
+        public event Action StartJumpZonePlatformExit;
+        public event Action PlatformFinishJumpZoneEnter;
+        public event Action FinishJumpZonePlatformExit;
+        public event Action NoPlatformJumpZoneEnter;
+        public event Action PleasurePressed;
+        public event Action DeathZoneEnter;
 
-    private void OnCollisionExit(Collision other)
-    {
-        if (other.gameObject.TryGetComponent(out JumpPlatformZone jumpPlatformZone))
+        private void OnCollisionEnter(Collision other)
         {
-            PlatformJumpZoneExit?.Invoke();
+            if (other.gameObject.TryGetComponent(out Obstacle obstacle))
+            {
+                ObstacleCollided?.Invoke();
+            }
         }
-    }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.TryGetComponent(out StartJumpZone startJumpZone))
+        private void OnTriggerEnter(Collider other)
         {
-            StartJumpZoneEnter?.Invoke();
+            if (other.TryGetComponent(out JumpZone jumpZone))
+            {
+                switch (jumpZone.JumpZoneType)
+                {
+                    case JumpZoneType.StartJumpZone:
+                        StartJumpZoneEnter?.Invoke();
+                        break;
+                    case JumpZoneType.FinishJumpZone:
+                        FinishJumpZoneEnter?.Invoke();
+                        break;
+                    case JumpZoneType.PlatformStartJumpZone:
+                        PlatformStartJumpZoneEnter?.Invoke();
+                        break;
+                    case JumpZoneType.PlatformFinishJumpZone:
+                        PlatformFinishJumpZoneEnter?.Invoke();
+                        break;
+                    case JumpZoneType.NoPlatformJumpZone:
+                        NoPlatformJumpZoneEnter?.Invoke();
+                        break;
+                }
+            }
+            else if (other.TryGetComponent(out FinishZone finishZone))
+            {
+                FinishZoneEnter?.Invoke();
+            }
+            else if (other.TryGetComponent(out PressurePlate pressurePlate))
+            {
+                PleasurePressed?.Invoke();
+            }
+            else if (other.TryGetComponent(out DeathZone deathZone))
+            {
+                DeathZoneEnter?.Invoke();
+            }
         }
-        else if (other.TryGetComponent(out FinishJumpZone finishJumpZone))
-        {
-            FinishJumpZoneEnter?.Invoke();
-        }
-        else if(other.TryGetComponent(out FinishZone finishZone))
-        {
-            FinishZoneEnter?.Invoke();
-        }
-        else if(other.TryGetComponent(out PressurePlate pressurePlate))
-        {
-            PleasurePressed?.Invoke();
-        }
-    }
 
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.TryGetComponent(out StartJumpZone startJumpZone))
+        private void OnTriggerExit(Collider other)
         {
-            StartJumpZoneExit?.Invoke();
+            if (other.TryGetComponent(out JumpZone jumpZone))
+            {
+                switch (jumpZone.JumpZoneType)
+                {
+                    case JumpZoneType.StartJumpZone:
+                        StartJumpZoneExit?.Invoke();
+                        break;
+                    case JumpZoneType.FinishJumpZone:
+                        FinishZoneExit?.Invoke();
+                        break;
+                    case JumpZoneType.PlatformStartJumpZone:
+                        StartJumpZonePlatformExit?.Invoke();
+                        break;
+                    case JumpZoneType.PlatformFinishJumpZone:
+                        FinishJumpZonePlatformExit?.Invoke();
+                        break;
+                }
+            }
         }
     }
 }

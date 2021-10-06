@@ -1,18 +1,21 @@
 using UnityEngine;
 
-public class PlayerEffects : MonoBehaviour
+namespace Player
 {
-    [SerializeField] private ParticleSystem _trailEffect;
-
-    public void Play()
+    public class PlayerEffects : MonoBehaviour
     {
-        if(!_trailEffect.isPlaying)
-            _trailEffect.Play();
-    }
+        [SerializeField] private ParticleSystem _dustStepsEffect;
 
-    public void Stop()
-    {
-        if(_trailEffect.isPlaying)
-            _trailEffect.Stop();
+        public void Play()
+        {
+            if(!_dustStepsEffect.isPlaying)
+                _dustStepsEffect.Play();
+        }
+
+        public void Stop()
+        {
+            if(_dustStepsEffect.isPlaying)
+                _dustStepsEffect.Stop();
+        }
     }
 }

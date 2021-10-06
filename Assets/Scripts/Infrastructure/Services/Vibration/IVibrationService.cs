@@ -1,7 +1,8 @@
-using UnityEngine;
-
-public interface IVibrationService
+namespace Infrastructure.Services.Vibration
 {
-    void Vibrate();
-    void Cancel();
+    public interface IVibrationService
+    {
+        void Vibrate();
+        void Cancel();
+    }
 }

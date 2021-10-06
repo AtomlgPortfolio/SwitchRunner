@@ -1,9 +1,12 @@
 using UnityEngine;
 
-public class IPhoneVibrationService : IVibrationService
+namespace Infrastructure.Services.Vibration
 {
-    public void Vibrate() => 
-        Handheld.Vibrate();
+    public class IPhoneVibrationService : IVibrationService
+    {
+        public void Vibrate() => 
+            Handheld.Vibrate();
 
-    public void Cancel() {}
+        public void Cancel() {}
+    }
 }

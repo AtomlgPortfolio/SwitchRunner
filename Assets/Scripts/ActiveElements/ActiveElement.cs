@@ -1,21 +1,24 @@
 using UnityEngine;
 
-public class ActiveElement : MonoBehaviour
+namespace ActiveElements
 {
-    private Collider _collider;
-
-    private void Awake()
+    public class ActiveElement : MonoBehaviour
     {
-        _collider = GetComponent<Collider>();
-    }
+        private Collider _collider;
+
+        private void Awake()
+        {
+            _collider = GetComponent<Collider>();
+        }
     
-    public virtual void Deactivate()
-    {
-        _collider.enabled = false;
-    }
+        public virtual void Deactivate()
+        {
+            _collider.enabled = false;
+        }
 
-    public virtual void Activate()
-    {
-        _collider.enabled = true;
+        public virtual void Activate()
+        {
+            _collider.enabled = true;
+        }
     }
 }

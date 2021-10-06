@@ -1,23 +1,26 @@
 using DG.Tweening;
 using UnityEngine;
 
-public class SpikesPlatform : ActiveElement
+namespace ActiveElements
 {
-    [SerializeField] private float _activatedYPosition;
-    [SerializeField] private float _deactivatedYPosition;
-    [SerializeField] private Transform _spikesContainerTransofrm;
-    [SerializeField] private float _activatedAnimationDuraction;
-    [SerializeField] private float _deactivatedAnimationDuraction;
-
-    public override void Deactivate()
+    public class SpikesPlatform : ActiveElement
     {
-        _spikesContainerTransofrm.DOLocalMoveY(_deactivatedYPosition,_deactivatedAnimationDuraction);
-        base.Deactivate();
-    }
+        [SerializeField] private float _activatedYPosition;
+        [SerializeField] private float _deactivatedYPosition;
+        [SerializeField] private Transform _spikesContainerTransofrm;
+        [SerializeField] private float _activatedAnimationDuraction;
+        [SerializeField] private float _deactivatedAnimationDuraction;
 
-    public override void Activate()
-    {
-        base.Activate();
-        _spikesContainerTransofrm.DOLocalMoveY(_activatedYPosition,_activatedAnimationDuraction);
+        public override void Deactivate()
+        {
+            _spikesContainerTransofrm.DOLocalMoveY(_deactivatedYPosition,_deactivatedAnimationDuraction);
+            base.Deactivate();
+        }
+
+        public override void Activate()
+        {
+            base.Activate();
+            _spikesContainerTransofrm.DOLocalMoveY(_activatedYPosition,_activatedAnimationDuraction);
+        }
     }
 }

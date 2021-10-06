@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 4631720823120719940}
   - component: {fileID: 60138506948840101}
   - component: {fileID: 1875679436102656168}
-  - component: {fileID: 7202873023158605277}
   m_Layer: 0
   m_Name: RightPart
   m_TagString: Untagged
@@ -299,20 +298,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1675632922357329291}
   m_Mesh: {fileID: 0}
---- !u!64 &7202873023158605277
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1675632922357329291}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 0}
 --- !u!1 &4293782379593341517
 GameObject:
   m_ObjectHideFlags: 0
@@ -325,7 +310,6 @@ GameObject:
   - component: {fileID: 5250234850287309085}
   - component: {fileID: 7583361433465802622}
   - component: {fileID: 1882838170036068169}
-  - component: {fileID: 2953381341449582478}
   m_Layer: 0
   m_Name: LeftPart
   m_TagString: Untagged
@@ -612,20 +596,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4293782379593341517}
   m_Mesh: {fileID: 0}
---- !u!64 &2953381341449582478
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4293782379593341517}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 0}
 --- !u!1 &6979733965534483766
 GameObject:
   m_ObjectHideFlags: 0
@@ -638,7 +608,7 @@ GameObject:
   - component: {fileID: 2778114169841122274}
   - component: {fileID: 5443741273484571087}
   - component: {fileID: 8393834470499614850}
-  - component: {fileID: 9012131391226343706}
+  - component: {fileID: 8941372760602418970}
   m_Layer: 6
   m_Name: PlatformWithDownPart
   m_TagString: Untagged
@@ -653,7 +623,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6979733965534483766}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 2.5, y: 0.53573817, z: 10.330002}
   m_LocalScale: {x: 0.8, y: 1, z: 1}
   m_Children:
@@ -928,8 +898,8 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6979733965534483766}
   m_Mesh: {fileID: 0}
---- !u!64 &9012131391226343706
-MeshCollider:
+--- !u!65 &8941372760602418970
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -938,10 +908,9 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 0}
+  serializedVersion: 2
+  m_Size: {x: 2.5000002, y: 0.1, z: 2.5}
+  m_Center: {x: 1.2500002, y: 0.05, z: -1.25}
 --- !u!1 &9140897137923724621
 GameObject:
   m_ObjectHideFlags: 0
@@ -954,8 +923,6 @@ GameObject:
   - component: {fileID: 4074590624708737945}
   - component: {fileID: 6163755889688015284}
   - component: {fileID: 7672692794748715257}
-  - component: {fileID: 7140324490596856161}
-  - component: {fileID: 9140897137923724658}
   m_Layer: 0
   m_Name: PlatformDownPart
   m_TagString: Untagged
@@ -1242,29 +1209,3 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9140897137923724621}
   m_Mesh: {fileID: 0}
---- !u!64 &7140324490596856161
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9140897137923724621}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 0}
---- !u!114 &9140897137923724658
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9140897137923724621}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 20e8978add77d3a4490356559b80f932, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

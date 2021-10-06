@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6176622284942770810}
   - component: {fileID: 4086472373186021463}
   - component: {fileID: 524386619001829658}
-  - component: {fileID: 800918435788198811}
+  - component: {fileID: 6798067098697904182}
   m_Layer: 0
   m_Name: Platform
   m_TagString: Untagged
@@ -301,7 +301,7 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1434082226101038254}
   m_Mesh: {fileID: 0}
---- !u!65 &800918435788198811
+--- !u!65 &6798067098697904182
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -312,8 +312,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.5000002, y: 0.1, z: 2.5}
-  m_Center: {x: 1.2500002, y: 0.05, z: -1.25}
+  m_Size: {x: 2.5, y: 0.1, z: 2.5}
+  m_Center: {x: 1.25, y: 0.05, z: -1.25}
 --- !u!1 &5236711595306083285
 GameObject:
   m_ObjectHideFlags: 0
@@ -326,7 +326,6 @@ GameObject:
   - component: {fileID: 4316288922370779269}
   - component: {fileID: 1875641681206654694}
   - component: {fileID: 7573702687143143121}
-  - component: {fileID: 6574396031250458381}
   m_Layer: 0
   m_Name: LeftPart
   m_TagString: Untagged
@@ -613,19 +612,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5236711595306083285}
   m_Mesh: {fileID: 0}
---- !u!65 &6574396031250458381
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5236711595306083285}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.10000002, y: 0.1, z: 2.5}
-  m_Center: {x: 0.050000127, y: 0.05, z: -1.25}
 --- !u!1 &7240405443272741907
 GameObject:
   m_ObjectHideFlags: 0
@@ -638,7 +624,6 @@ GameObject:
   - component: {fileID: 3710175183382677980}
   - component: {fileID: 8354100923636609853}
   - component: {fileID: 7583461035927542064}
-  - component: {fileID: 6850431314399745657}
   m_Layer: 0
   m_Name: RightPart
   m_TagString: Untagged
@@ -925,16 +910,3 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7240405443272741907}
   m_Mesh: {fileID: 0}
---- !u!65 &6850431314399745657
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7240405443272741907}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.10000002, y: 0.1, z: 2.5}
-  m_Center: {x: 0.05000001, y: 0.05, z: -1.25}

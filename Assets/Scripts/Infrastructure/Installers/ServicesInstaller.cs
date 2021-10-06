@@ -1,28 +1,32 @@
+using Infrastructure.Services.Input;
+using Infrastructure.Services.Vibration;
 using UnityEngine;
 using Zenject;
 
-public class ServicesInstaller : MonoInstaller
+namespace Infrastructure.Installers
 {
-    public override void InstallBindings()
+    public class ServicesInstaller : MonoInstaller
     {
-        Container.Bind<IInputService>().FromInstance(InputService()).AsSingle();
-        Container.Bind<IVibrationService>().FromInstance(VibrationService()).AsSingle();
-    }
+        public override void InstallBindings()
+        {
+            Container.Bind<IInputService>().FromInstance(InputService()).AsSingle();
+            Container.Bind<IVibrationService>().FromInstance(VibrationService()).AsSingle();
+        }
     
-    private IInputService InputService()
-    {
-        if (Application.isEditor)
-            return new StandaloneInputService();
+        private IInputService InputService()
+        {
+            if (Application.isEditor)
+                return new StandaloneInputService();
             
-        return new MobileInputService();
-    }
+            return new MobileInputService();
+        }
     
-    private IVibrationService VibrationService()
-    {
-#if UNITY_ANDROID && !UNITY_EDITOR
-        return new AndroidVibrationService();
-#else
-        return new IPhoneVibrationService();
-#endif
+        private IVibrationService VibrationService()
+        {
+            if (Application.platform == RuntimePlatform.Android)
+                return new AndroidVibrationService();
+        
+            return new IPhoneVibrationService();
+        }
     }
 }
