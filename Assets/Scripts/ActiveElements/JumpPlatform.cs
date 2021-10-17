@@ -3,12 +3,13 @@ using UnityEngine;
 
 namespace ActiveElements
 {
-    public class JumpPlatform : ActiveElement
+    public class JumpPlatform : DynamicElement
     {
         [SerializeField] private float _activatedYPosition;
         [SerializeField] private float _deactivatedYPosition;
         [SerializeField] private float _activatedAnimationDuraction;
         [SerializeField] private float _deactivatedAnimationDuraction;
+        
         public override void Activate()
         {
             gameObject.SetActive(true);

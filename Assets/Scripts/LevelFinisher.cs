@@ -1,3 +1,4 @@
+using System;
 using UI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -32,12 +33,37 @@ public class LevelFinisher : MonoBehaviour
 
     private void OnNextButtonClick()
     {
-        var currentSceneName = _currentSceneName.Replace(" ", "");
+        int nextSceneNumber = GetNextSceneNumber();
+        if (nextSceneNumber != -1)
+        {
+            string nextSceneName = GetNextSceneName(nextSceneNumber);
+            LoadScene(nextSceneName);
+        }
+        else
+        {
+            throw new ArgumentException(nameof(nextSceneNumber));
+        }
+    }
+
+    private static string GetNextSceneName(int nextSceneNumber)
+    {
+        int nextLevelNumber = nextSceneNumber + 1;
+        string nextScene = $"Level {nextLevelNumber}";
+        return nextScene;
+    }
+
+    private int GetNextSceneNumber()
+    {
+        var currentSceneName = _currentSceneName.Replace("Level ", "");
         int.TryParse(currentSceneName, out int result);
-        int nextLevel = result + 1;
-        string nextScene = $"Level {nextLevel}";
-        
-        Scene scene = SceneManager.GetSceneByName(nextScene);
-        SceneManager.LoadScene(scene.IsValid() ? nextScene : _currentSceneName);
+        return result;
+    }
+
+    private void LoadScene(string nextScene)
+    {
+        if (Application.CanStreamedLevelBeLoaded(nextScene))
+            SceneManager.LoadScene(nextScene);
+        else
+            SceneManager.LoadScene(_currentSceneName);
     }
 }
