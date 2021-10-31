@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1190286139822021893}
   - component: {fileID: 1684257723843842138}
   - component: {fileID: 2734335661492816128}
-  - component: {fileID: 3536145863570944515}
+  - component: {fileID: 1062952653637026423}
   m_Layer: 0
   m_Name: DeactivatedBlueLine
   m_TagString: Untagged
@@ -109,7 +109,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20e8978add77d3a4490356559b80f932, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &3536145863570944515
+--- !u!114 &1062952653637026423
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -118,12 +118,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 6106862280498454687}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 495a0f0046190294fac9fcddf989a7e6, type: 3}
+  m_Script: {fileID: 11500000, guid: f6329604bbb1dbb49a3753c55c260f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _colliders:
   - {fileID: 1684257723843842138}
   _activatedYPosition: 0.01899999
   _deactivatedYPosition: -0.21
-  _activatedAnimationDuraction: 0.5
-  _deactivatedAnimationDuraction: 0.5
+  _activated: 0
+  ActivatedAnimationDuraction: 0.5
+  DeactivatedAnimationDuraction: 0.5
+  _activatedYPosition: 0.01899999
+  _deactivatedYPosition: -0.21

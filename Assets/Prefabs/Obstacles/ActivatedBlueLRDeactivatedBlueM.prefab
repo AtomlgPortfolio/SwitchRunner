@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &8192491273005430772
+--- !u!114 &2281031464346298272
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -9,15 +9,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 2530870083730197868}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 495a0f0046190294fac9fcddf989a7e6, type: 3}
+  m_Script: {fileID: 11500000, guid: f6329604bbb1dbb49a3753c55c260f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _colliders:
   - {fileID: 6989363919233678761}
   _activatedYPosition: 0.01899999
   _deactivatedYPosition: -0.21
-  _activatedAnimationDuraction: 0.5
-  _deactivatedAnimationDuraction: 0.5
+  _activated: 0
+  ActivatedAnimationDuraction: 0.5
+  DeactivatedAnimationDuraction: 0.5
+  _activatedYPosition: 0.01899999
+  _deactivatedYPosition: -0.21
 --- !u!1 &6032190090593586931
 GameObject:
   m_ObjectHideFlags: 0
@@ -27,7 +30,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8110107295266535517}
-  - component: {fileID: 6680894719835969744}
+  - component: {fileID: 2735851215775926722}
   m_Layer: 0
   m_Name: Container
   m_TagString: Untagged
@@ -51,7 +54,7 @@ Transform:
   m_Father: {fileID: 1307931251717388758}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6680894719835969744
+--- !u!114 &2735851215775926722
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -60,7 +63,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6032190090593586931}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 495a0f0046190294fac9fcddf989a7e6, type: 3}
+  m_Script: {fileID: 11500000, guid: f6329604bbb1dbb49a3753c55c260f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _colliders:
@@ -68,8 +71,11 @@ MonoBehaviour:
   - {fileID: 5343447997048752356}
   _activatedYPosition: 0
   _deactivatedYPosition: -0.229
-  _activatedAnimationDuraction: 0.5
-  _deactivatedAnimationDuraction: 0.5
+  _activated: 0
+  ActivatedAnimationDuraction: 0.5
+  DeactivatedAnimationDuraction: 0.5
+  _activatedYPosition: 0
+  _deactivatedYPosition: -0.229
 --- !u!1 &9122348435074155822
 GameObject:
   m_ObjectHideFlags: 0
@@ -160,6 +166,7 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 5047301489454744369, guid: 162193608a8872b4bafd67b30f24a919, type: 3}
     - {fileID: 8436350276153256841, guid: 162193608a8872b4bafd67b30f24a919, type: 3}
+    - {fileID: 453036221076007202, guid: 162193608a8872b4bafd67b30f24a919, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 162193608a8872b4bafd67b30f24a919, type: 3}
 --- !u!4 &12534837811766705 stripped
 Transform:
@@ -302,6 +309,7 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 5047301489454744369, guid: 162193608a8872b4bafd67b30f24a919, type: 3}
     - {fileID: 8436350276153256841, guid: 162193608a8872b4bafd67b30f24a919, type: 3}
+    - {fileID: 453036221076007202, guid: 162193608a8872b4bafd67b30f24a919, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 162193608a8872b4bafd67b30f24a919, type: 3}
 --- !u!4 &7694240389412085869 stripped
 Transform:

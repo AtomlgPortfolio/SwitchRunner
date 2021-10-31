@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5016436366562447811}
   - component: {fileID: 4775759292085853340}
   - component: {fileID: 8136605329486087622}
-  - component: {fileID: 8436350276153256841}
+  - component: {fileID: 453036221076007202}
   m_Layer: 0
   m_Name: ActivatedBlue
   m_TagString: Untagged
@@ -109,7 +109,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20e8978add77d3a4490356559b80f932, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &8436350276153256841
+--- !u!114 &453036221076007202
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -118,12 +118,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 118965369190771801}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 495a0f0046190294fac9fcddf989a7e6, type: 3}
+  m_Script: {fileID: 11500000, guid: f6329604bbb1dbb49a3753c55c260f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _colliders:
   - {fileID: 4775759292085853340}
   _activatedYPosition: 0.01899999
   _deactivatedYPosition: -0.21
-  _activatedAnimationDuraction: 0.5
-  _deactivatedAnimationDuraction: 0.5
+  _activated: 0
+  ActivatedAnimationDuraction: 0.5
+  DeactivatedAnimationDuraction: 0.5
+  _activatedYPosition: 0.01899999
+  _deactivatedYPosition: -0.21

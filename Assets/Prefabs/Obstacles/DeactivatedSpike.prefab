@@ -7031,7 +7031,7 @@ GameObject:
   - component: {fileID: 943096927201848491}
   - component: {fileID: 943096927201848490}
   - component: {fileID: 943096927201848484}
-  - component: {fileID: 3931651823398913732}
+  - component: {fileID: 3278749420738956053}
   m_Layer: 0
   m_Name: Spikes
   m_TagString: Untagged
@@ -7092,7 +7092,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20e8978add77d3a4490356559b80f932, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &3931651823398913732
+--- !u!114 &3278749420738956053
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -7101,16 +7101,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 943096927201848487}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 495a0f0046190294fac9fcddf989a7e6, type: 3}
+  m_Script: {fileID: 11500000, guid: d4450333927a7344a8c5f0147bb6e07a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _colliders:
   - {fileID: 943096927201848490}
   _activatedYPosition: -0.773821
   _deactivatedYPosition: -23.7
-  _activatedAnimationDuraction: 0.5
-  _deactivatedAnimationDuraction: 0.5
   _activated: 0
+  ActivatedAnimationDuraction: 0.5
+  DeactivatedAnimationDuraction: 0.5
+  _activatedYPosition: -0.773821
+  _deactivatedYPosition: -23.7
 --- !u!1 &943096927249067933
 GameObject:
   m_ObjectHideFlags: 0
